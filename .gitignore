@@ -1,0 +1,33 @@
+# Osobní data domácnosti - nikdy se nenahrávají do repozitáře
+data/rozpocet.sqlite
+data/rozpocet.sqlite-wal
+data/rozpocet.sqlite-shm
+data/php_errors.log
+data/RESTORE_PENDING.json
+data/_restore_pending/
+data/_backup_tmp.sqlite
+data/_import_upload.zip
+data/backups/*.zip
+data/sessions/*
+
+# Nahrané doklady (účtenky, faktury...) - obsah je soukromý, struktura složek zůstává
+uploads/uctenky/*
+uploads/faktury/*
+uploads/smlouvy/*
+uploads/ostatni/*
+
+# Vygenerované exporty
+exporty/*
+
+# Ponechat prázdné složky ve struktuře i po vyloučení obsahu
+!data/backups/.gitkeep
+!data/sessions/.gitkeep
+!uploads/uctenky/.gitkeep
+!uploads/faktury/.gitkeep
+!uploads/smlouvy/.gitkeep
+!uploads/ostatni/.gitkeep
+!exporty/.gitkeep
+
+# Dočasné/testovací soubory
+*.tmp
+Thumbs.db
