@@ -41,7 +41,7 @@ $activeNav = 'o-programu';
         <tr><td class="text-muted" style="padding:6px 0;width:160px;">Název aplikace</td><td><strong><?= h(APP_NAME) ?></strong></td></tr>
         <tr><td class="text-muted" style="padding:6px 0;">Verze</td><td><strong>v<?= h(APP_VERSION) ?></strong></td></tr>
         <tr><td class="text-muted" style="padding:6px 0;">Vytvořeno</td><td>červenec 2026</td></tr>
-        <tr><td class="text-muted" style="padding:6px 0;">Autor</td><td><a href="https://www.miraxstudio.cz" target="_blank" rel="noopener">Mirax Studio</a></td></tr>
+        <tr><td class="text-muted" style="padding:6px 0;">Autor</td><td><a href="https://www.miraxstudio.cz" target="_blank" rel="noopener">Mirax Studio®</a></td></tr>
         <tr><td class="text-muted" style="padding:6px 0;">Cena</td><td><strong>zdarma</strong>, navždy 🎉</td></tr>
         <tr><td class="text-muted" style="padding:6px 0;">Licence</td><td>open-source, volně k šíření a úpravám</td></tr>
       </tbody>

@@ -7,7 +7,7 @@ Běží celá lokálně na vašem počítači — bez instalace, bez internetu, 
 ![Licence](https://img.shields.io/badge/licence-MIT%20(open--source)-16a34a)
 ![Platforma](https://img.shields.io/badge/platforma-Windows-0ea5e9)
 
-Vytvořilo [Mirax Studio](https://www.miraxstudio.cz) · více o vzniku aplikace v sekci [O programu](#-proč-tahle-aplikace-vznikla) níže.
+Vytvořilo [Mirax Studio®](https://www.miraxstudio.cz) · více o vzniku aplikace v sekci [O programu](#-proč-tahle-aplikace-vznikla) níže.
 
 ![Náhled aplikace Domácí rozpočet - dashboard s přehledem příjmů, výdajů a kategorií](docs/screenshot-prehled.png)
 
@@ -126,6 +126,7 @@ dále šířit — viz soubor [`LICENSE`](LICENSE) (MIT).
 
 Přečtěte si také [omezení odpovědnosti](DISCLAIMER.md). Licence MIT zůstává
 hlavním právním textem projektu; doplňující dokumenty ji nenahrazují.
+Použití názvu a loga upravuje [oznámení o ochranné známce](TRADEMARKS.md).
 
 ## 🙋 O původu aplikace
 
@@ -137,6 +138,6 @@ je to vlastně vtipný příběh) najdete přímo v aplikaci v sekci **O program
 
 <div align="center">
 
-Vytvořilo ❤️ **[Mirax Studio](https://www.miraxstudio.cz)**
+Vytvořilo ❤️ **[Mirax Studio®](https://www.miraxstudio.cz)**
 
 </div>

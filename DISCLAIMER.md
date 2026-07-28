@@ -39,5 +39,9 @@ Autorská práva k vlastnímu zdrojovému kódu projektu náleží držiteli uve
 v souboru `LICENSE` — Mirax Studio. Přibalený běh PHP je samostatná součást
 třetí strany a řídí se vlastní licencí v `app/php/license.txt`.
 
+**Mirax Studio®** je registrovaná ochranná známka. Licence MIT neposkytuje
+oprávnění vydávat upravené verze za oficiální produkt Mirax Studio®; podrobné
+podmínky jsou v [oznámení o ochranné známce](TRADEMARKS.md).
+
 Tento dokument je informativním doplněním licence MIT; nenahrazuje ji ani
 nepředstavuje individuální právní radu.
