@@ -22,8 +22,9 @@ DEALINGS IN THE SOFTWARE.
 
 ---
 
-Note: this project bundles a redistributable copy of PHP (in `app/php/`) so
-that it can run without requiring a separate installation. The bundled PHP
-runtime is distributed under its own license - see `app/php/license.txt`
-- and is not covered by the MIT license above, which applies only to this
-project's own source code.
+Note: the portable Windows package published in GitHub Releases bundles a
+redistributable copy of PHP so that it can run without a separate installation.
+The PHP runtime is not part of the source repository and is distributed under
+its own license in the release package (`app/php/license.txt`). It is not
+covered by the MIT license above, which applies only to this project's own
+source code.

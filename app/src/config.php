@@ -46,7 +46,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 const APP_NAME = 'Domácí rozpočet';
-const APP_VERSION = '1.00';
+const APP_VERSION = '1.01';
 const ALLOWED_UPLOAD_EXT = ['pdf', 'jpg', 'jpeg', 'png', 'webp', 'gif', 'doc', 'docx', 'xls', 'xlsx'];
 const UPLOAD_FOLDERS = ['uctenky' => 'Účtenky', 'faktury' => 'Faktury', 'smlouvy' => 'Smlouvy', 'ostatni' => 'Ostatní'];
 

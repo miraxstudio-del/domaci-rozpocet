@@ -31,3 +31,10 @@ exporty/*
 # Dočasné/testovací soubory
 *.tmp
 Thumbs.db
+
+# PHP runtime patří pouze do přenosného balíčku vydaného přes GitHub Releases.
+# Lokálně jej ponecháváme pro sestavení a otestování balíčku, ne do zdrojového repozitáře.
+app/php/
+
+# Lokálně vytvořené přenosné balíčky a jejich kontrolní součty
+dist/

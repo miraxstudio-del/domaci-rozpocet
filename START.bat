@@ -9,8 +9,10 @@ set "PHP_INI=app\php\php.ini"
 if not exist "%PHP_EXE%" (
     echo.
     echo [CHYBA] Nepodarilo se najit prilozene PHP ve slozce "app\php".
-    echo Zkontrolujte, ze cela slozka aplikace byla spravne rozbalena
-    echo a ze antivirus neblokuje soubor app\php\php.exe.
+    echo Pro bezne pouziti stahnete a rozbalte prenosny balicek z GitHub Releases:
+    echo https://github.com/miraxstudio-del/domaci-rozpocet/releases
+    echo Pokud sestavujete aplikaci ze zdrojoveho kodu, postupujte podle docs\RELEASING.md.
+    echo Take zkontrolujte, zda antivirus neblokuje soubor app\php\php.exe.
     echo.
     pause
     exit /b 1
