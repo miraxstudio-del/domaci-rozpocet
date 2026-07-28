@@ -10,6 +10,10 @@ if (!preg_match('/^\d{4}-\d{2}$/', $monthYear)) {
 }
 $dateFrom = (string) ($_GET['dateFrom'] ?? '');
 $dateTo = (string) ($_GET['dateTo'] ?? '');
+$year = (string) ($_GET['year'] ?? date('Y'));
+if (!preg_match('/^\d{4}$/', $year)) {
+    $year = date('Y');
+}
 
 $filters = [];
 $titleParts = [APP_NAME];
@@ -17,6 +21,10 @@ switch ($scope) {
     case 'month':
         $filters['month_year'] = $monthYear;
         $titleParts[] = month_year_label($monthYear);
+        break;
+    case 'year':
+        $filters['year'] = $year;
+        $titleParts[] = 'Rok ' . $year;
         break;
     case 'range':
         if ($dateFrom) $filters['date_from'] = $dateFrom;

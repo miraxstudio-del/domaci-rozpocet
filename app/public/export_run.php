@@ -11,9 +11,13 @@ if (!preg_match('/^\d{4}-\d{2}$/', $monthYear)) {
 }
 $dateFrom = (string) ($_GET['date_from'] ?? '');
 $dateTo = (string) ($_GET['date_to'] ?? '');
+$year = (string) ($_GET['y'] ?? date('Y'));
+if (!preg_match('/^\d{4}$/', $year)) {
+    $year = date('Y');
+}
 
 if ($format === 'print') {
-    header('Location: /tisk.php?' . http_build_query(compact('scope', 'monthYear', 'dateFrom', 'dateTo')));
+    header('Location: /tisk.php?' . http_build_query(compact('scope', 'monthYear', 'dateFrom', 'dateTo', 'year')));
     exit;
 }
 
@@ -23,6 +27,10 @@ switch ($scope) {
     case 'month':
         $filters['month_year'] = $monthYear;
         $label = 'mesic_' . $monthYear;
+        break;
+    case 'year':
+        $filters['year'] = $year;
+        $label = 'rok_' . $year;
         break;
     case 'range':
         if ($dateFrom) $filters['date_from'] = $dateFrom;

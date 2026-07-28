@@ -2,6 +2,12 @@
 $pageTitle = 'Export';
 $activeNav = 'export';
 $currentMonth = current_month_year();
+$currentYear = date('Y');
+$yearOptions = array_values(array_unique(array_map(
+    static fn (string $month): string => substr($month, 0, 4),
+    array_keys(month_options(60, 12))
+)));
+rsort($yearOptions, SORT_STRING);
 ?>
 <div class="topbar">
   <div>
@@ -23,6 +29,7 @@ $currentMonth = current_month_year();
           <label class="radio-pill"><input type="radio" name="scope" value="expense"><span>🧾 Pouze výdaje</span></label>
           <label class="radio-pill"><input type="radio" name="scope" value="business"><span>💼 Pouze podnikatelské</span></label>
           <label class="radio-pill"><input type="radio" name="scope" value="categories"><span>🏷️ Přehled podle kategorií</span></label>
+          <label class="radio-pill"><input type="radio" name="scope" value="year"><span>📅 Celý rok</span></label>
         </div>
       </div>
 
@@ -31,6 +38,14 @@ $currentMonth = current_month_year();
         <select name="m">
           <?php foreach (month_options() as $val => $label): ?>
             <option value="<?= h($val) ?>" <?= $val === $currentMonth ? 'selected' : '' ?>><?= h($label) ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="field export-month-field" id="field-year" style="display:none;">
+        <label>Rok</label>
+        <select name="y">
+          <?php foreach ($yearOptions as $year): ?>
+            <option value="<?= h($year) ?>" <?= $year === $currentYear ? 'selected' : '' ?>><?= h($year) ?></option>
           <?php endforeach; ?>
         </select>
       </div>
@@ -63,6 +78,7 @@ $currentMonth = current_month_year();
 document.querySelectorAll('#scope-radios input').forEach(function (r) {
   r.addEventListener('change', function () {
     document.getElementById('field-month').style.display = (this.value === 'month' || this.value === 'categories') ? '' : 'none';
+    document.getElementById('field-year').style.display = this.value === 'year' ? '' : 'none';
     document.getElementById('field-from').style.display = this.value === 'range' ? '' : 'none';
     document.getElementById('field-to').style.display = this.value === 'range' ? '' : 'none';
   });
