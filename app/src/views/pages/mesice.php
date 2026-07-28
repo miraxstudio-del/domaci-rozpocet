@@ -82,7 +82,7 @@ if ($compareWith && preg_match('/^\d{4}-\d{2}$/', $compareWith)) {
   </div>
 </div>
 
-<div class="grid grid-cols-2" style="margin-top:16px;align-items:flex-start;">
+<div class="grid grid-cols-2" style="margin-top:16px;">
   <div class="card">
     <h3>Výdaje podle kategorií</h3>
     <?php if (!$catExpense): ?><p class="text-muted">Žádné výdaje.</p><?php endif; ?>

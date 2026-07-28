@@ -168,7 +168,7 @@ if ($view === 'year') {
   <div class="text-muted" style="margin-top:8px;font-size:13px;">Průměrný měsíční výdaj za sledované období: <strong><?= format_money($avgExpense) ?></strong></div>
 </div>
 
-<div class="grid grid-cols-2" style="margin-top:16px;align-items:flex-start;">
+<div class="grid grid-cols-2" style="margin-top:16px;">
   <div class="card">
     <h3>💥 Největší výdaje <?= $view === 'year' ? 'roku' : 'měsíce' ?></h3>
     <?php if (!$topExpenses): ?>

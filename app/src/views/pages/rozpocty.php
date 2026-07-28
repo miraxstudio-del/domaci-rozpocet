@@ -51,7 +51,7 @@ $totalPct = $totalBudget ? min(999, ($summary['expense'] / $totalBudget) * 100) 
   </div>
 </div>
 
-<div class="grid" style="grid-template-columns: 1fr 1fr; align-items:flex-start;">
+<div class="grid" style="grid-template-columns: 1fr 1fr;">
   <div class="card">
     <h3>Měsíční plán</h3>
     <?php if ($totalBudget): ?>
