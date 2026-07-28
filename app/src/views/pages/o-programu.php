@@ -33,7 +33,7 @@ $activeNav = 'o-programu';
   </p>
 </div>
 
-<div class="grid grid-cols-2" style="align-items:stretch;">
+<div class="grid grid-cols-2 about-details-grid" style="align-items:stretch;">
   <div class="card">
     <h3>📋 Základní údaje</h3>
     <table style="width:100%;font-size:14px;">
