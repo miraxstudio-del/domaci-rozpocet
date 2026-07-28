@@ -565,14 +565,14 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
 
 .dashboard-topbar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto minmax(362px, 1fr);
   align-items: start;
   gap: 24px;
   margin: 0 0 32px;
 }
 .dashboard-heading h1 { margin: 0; font-size: 30px; line-height: 1.2; font-weight: 750; letter-spacing: -.045em; }
 .dashboard-heading .subtitle { margin-top: 7px; color: var(--text-muted); font-size: 15px; }
-.dashboard-month-switch { display: flex; align-items: center; gap: 13px; padding-top: 4px; }
+.dashboard-month-switch { display: flex; align-items: center; gap: 13px; padding-top: 4px; white-space: nowrap; }
 .dashboard-icon-button,
 .dashboard-today {
   display: inline-flex;
@@ -592,8 +592,8 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
 .dashboard-icon-button:hover, .dashboard-today:hover { background: var(--neutral-soft); color: var(--accent); }
 .dashboard-month-switch .current { min-width: 172px; color: var(--text); font-size: 18px; font-weight: 730; line-height: 47px; text-align: center; letter-spacing: -.025em; }
 .closed-mark { font-size: 13px; vertical-align: 1px; }
-.dashboard-today { padding: 0 17px; }
-.dashboard-actions { display: flex; align-items: center; justify-self: end; gap: 25px; padding-top: 5px; }
+.dashboard-today { min-width: 132px; padding: 0 17px; white-space: nowrap; }
+.dashboard-actions { display: flex; align-items: center; justify-self: end; min-width: 362px; gap: 25px; padding-top: 5px; white-space: nowrap; }
 .dashboard-period-tabs { display: flex; align-items: center; gap: 4px; padding: 0; }
 .dashboard-period-tabs a {
   display: inline-flex;
@@ -616,6 +616,7 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
   justify-content: center;
   gap: 8px;
   height: 45px;
+  min-width: 177px;
   padding: 0 21px;
   border-radius: 9px;
   background: linear-gradient(135deg, #5544f7, #4938ec);
@@ -623,6 +624,7 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
   color: #fff;
   font-size: 14px;
   font-weight: 690;
+  white-space: nowrap;
 }
 .dashboard-add-button:hover { color: #fff; background: linear-gradient(135deg, #4737eb, #3e2ed8); }
 .dashboard-add-button svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; }
