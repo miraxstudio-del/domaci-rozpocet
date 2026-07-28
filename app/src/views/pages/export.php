@@ -26,7 +26,7 @@ $currentMonth = current_month_year();
         </div>
       </div>
 
-      <div class="field" id="field-month">
+      <div class="field export-month-field" id="field-month">
         <label>Měsíc</label>
         <select name="m">
           <?php foreach (month_options() as $val => $label): ?>
