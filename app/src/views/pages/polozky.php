@@ -29,20 +29,24 @@ $totalCount = count_transactions($activeFilters);
 $totalPages = max(1, (int) ceil($totalCount / $perPage));
 $sumShown = array_sum(array_map(fn ($t) => $t['type'] === 'prijem' ? (float) $t['amount'] : -(float) $t['amount'], $items));
 ?>
-<div class="topbar">
+<div class="transactions-page">
+<div class="topbar transactions-topbar">
   <div>
     <h1>Příjmy a výdaje</h1>
     <div class="subtitle"><?= $totalCount ?> položek<?= $hasActiveFilter ? ' (filtrováno)' : '' ?></div>
   </div>
   <div class="btn-row">
-    <a class="btn" href="/index.php?p=polozka">➕ Přidat položku</a>
+    <a class="transactions-add-button" href="/index.php?p=polozka">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      Přidat položku
+    </a>
   </div>
 </div>
 
-<div class="card">
+<div class="card transactions-filter-card">
   <form method="get" action="/index.php">
     <input type="hidden" name="p" value="polozky">
-    <div class="filters-bar">
+    <div class="filters-bar transactions-filter-grid">
       <div class="field">
         <label>Měsíc</label>
         <select name="month_year">
@@ -73,9 +77,9 @@ $sumShown = array_sum(array_map(fn ($t) => $t['type'] === 'prijem' ? (float) $t[
           <?php endforeach; ?>
         </select>
       </div>
-      <div class="field" style="min-width:220px;">
+      <div class="field transactions-search-field">
         <label>Hledat</label>
-        <input type="search" name="q" value="<?= h($filters['q']) ?>" placeholder="Název, obchodník, doklad, poznámka...">
+        <span class="transactions-search-input"><input type="search" name="q" value="<?= h($filters['q']) ?>" placeholder="Název, obchodník, doklad..."><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="5.5"/><path d="m16 16 4 4"/></svg></span>
       </div>
       <div class="field">
         <button class="btn" type="submit">Filtrovat</button>
@@ -87,9 +91,9 @@ $sumShown = array_sum(array_map(fn ($t) => $t['type'] === 'prijem' ? (float) $t[
       <?php endif; ?>
     </div>
 
-    <details>
-      <summary class="text-muted" style="cursor:pointer;font-size:13px;font-weight:600;margin-bottom:10px;">Rozšířené filtry</summary>
-      <div class="filters-bar">
+    <details class="transactions-advanced-filters">
+      <summary>Rozšířené filtry</summary>
+      <div class="filters-bar transactions-advanced-grid">
         <div class="field">
           <label>Datum od</label>
           <input type="date" name="date_from" value="<?= h($filters['date_from']) ?>">
@@ -155,10 +159,22 @@ $sumShown = array_sum(array_map(fn ($t) => $t['type'] === 'prijem' ? (float) $t[
   </form>
 </div>
 
-<div class="card">
+<div class="card transactions-results-card">
   <?php if (!$items): ?>
-    <div class="empty-state">
-      <div class="ic">📭</div>
+    <div class="empty-state transactions-empty-state">
+      <div class="transactions-empty-illustration" aria-hidden="true">
+        <svg viewBox="0 0 160 128">
+          <path class="transactions-spark" d="M80 13v17M64 20l7 12M96 20l-7 12"/>
+          <circle class="transactions-dot" cx="43" cy="46" r="3"/><circle class="transactions-dot" cx="117" cy="47" r="3"/><circle class="transactions-dot" cx="128" cy="79" r="2.4"/>
+          <path class="transactions-box-side" d="m48 71 32 13 32-13v35l-32 11-32-11Z"/>
+          <path class="transactions-box-front" d="m48 71 32 13 32-13v35l-32 11-32-11Z"/>
+          <path class="transactions-box-left" d="m48 71 32 13v33l-32-11Z"/>
+          <path class="transactions-box-right" d="m112 71-32 13v33l32-11Z"/>
+          <path class="transactions-box-lid-left" d="m48 71 18-25 22 18-8 20Z"/>
+          <path class="transactions-box-lid-right" d="m112 71-18-25-22 18 8 20Z"/>
+          <path class="transactions-box-lid-top" d="m66 46 14-12 14 12-14 18Z"/>
+        </svg>
+      </div>
       <h3>Žádné položky nenalezeny</h3>
       <p>Zkuste upravit filtry nebo přidejte novou položku.</p>
     </div>
@@ -213,4 +229,5 @@ $sumShown = array_sum(array_map(fn ($t) => $t['type'] === 'prijem' ? (float) $t[
       <?php endif; ?>
     </div>
   <?php endif; ?>
+</div>
 </div>
