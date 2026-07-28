@@ -3,12 +3,15 @@ param(
     [ValidatePattern('^\d+\.\d+(?:\.\d+)?$')]
     [string]$Version = '1.01',
 
-    [string]$PhpRuntimePath = (Join-Path $PSScriptRoot '..\app\php')
+    [string]$PhpRuntimePath = ''
 )
 
 $ErrorActionPreference = 'Stop'
 
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+if ([string]::IsNullOrWhiteSpace($PhpRuntimePath)) {
+    $PhpRuntimePath = Join-Path $projectRoot 'app\php'
+}
 $runtimePath = (Resolve-Path $PhpRuntimePath).Path
 $phpExe = Join-Path $runtimePath 'php.exe'
 
