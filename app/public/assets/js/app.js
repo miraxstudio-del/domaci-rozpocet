@@ -10,9 +10,11 @@
     } else {
       document.documentElement.setAttribute('data-theme', value);
     }
-    buttons.forEach(function (b) {
-      b.classList.toggle('active', b.dataset.themeValue === value);
-    });
+    var activeValue = value;
+    if (value === 'system' && window.matchMedia) {
+      activeValue = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    buttons.forEach(function (b) { b.classList.toggle('active', b.dataset.themeValue === activeValue); });
   }
 
   apply(saved);
@@ -29,6 +31,47 @@
       }).catch(function () {});
     });
   });
+})();
+
+// Sbalená navigace na desktopu – preference zůstává uložená v prohlížeči.
+(function initSidebarCollapse() {
+  var sidebar = document.getElementById('app-sidebar');
+  var controls = document.querySelectorAll('[data-sidebar-collapse]');
+  if (!sidebar || !controls.length || !window.matchMedia) return;
+
+  var storageKey = 'sidebar-collapsed';
+  var media = window.matchMedia('(min-width: 1025px)');
+  var collapsed = false;
+  try { collapsed = localStorage.getItem(storageKey) === 'true'; } catch (error) {}
+
+  function apply() {
+    var active = media.matches && collapsed;
+    document.body.classList.toggle('sidebar-collapsed', active);
+    controls.forEach(function (control) {
+      control.setAttribute('aria-expanded', active ? 'false' : 'true');
+      control.setAttribute('aria-label', active ? 'Rozbalit levé menu' : 'Sbalit levé menu');
+      control.setAttribute('title', active ? 'Rozbalit levé menu' : 'Sbalit levé menu');
+    });
+    document.querySelectorAll('[data-sidebar-collapse-text]').forEach(function (label) {
+      label.textContent = active ? 'Rozbalit menu' : 'Menu';
+    });
+  }
+
+  controls.forEach(function (control) {
+    control.addEventListener('click', function () {
+      if (!media.matches) return;
+      collapsed = !collapsed;
+      try { localStorage.setItem(storageKey, String(collapsed)); } catch (error) {}
+      apply();
+    });
+  });
+
+  if (typeof media.addEventListener === 'function') {
+    media.addEventListener('change', apply);
+  } else {
+    media.addListener(apply);
+  }
+  apply();
 })();
 
 // Vysouvací navigace pro tablet a mobil. Na desktopu zůstává postranní menu stále viditelné.

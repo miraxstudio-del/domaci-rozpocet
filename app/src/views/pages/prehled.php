@@ -20,7 +20,6 @@ $due = upcoming_due(7);
 $prevPeriod = shift_period($period, -1);
 $nextPeriod = shift_period($period, 1);
 $todayLinkParams = $view === 'year' ? ['view' => 'year', 'y' => date('Y')] : ['m' => current_month_year()];
-$addItemMonth = $view === 'year' ? current_month_year() : $period;
 $periodQuery = static fn (string $value): string => http_build_query(
     $view === 'year'
         ? ['p' => 'prehled', 'view' => 'year', 'y' => $value]
@@ -115,10 +114,6 @@ foreach ($dashboardCategoryRows as $index => $category) {
         <a class="<?= $view === 'month' ? 'active' : '' ?>" href="/index.php?p=prehled&amp;m=<?= h(current_month_year()) ?>">Měsíc</a>
         <a class="<?= $view === 'year' ? 'active' : '' ?>" href="/index.php?p=prehled&amp;view=year&amp;y=<?= h(date('Y')) ?>">Rok</a>
       </div>
-      <a class="dashboard-add-button" href="/index.php?p=polozka&amp;type=vydaj&amp;m=<?= h($addItemMonth) ?>">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-        Přidat položku
-      </a>
       <details class="dashboard-customizer">
         <summary>
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.12 2.12-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.04 1.56V20.3h-3v-.08A1.7 1.7 0 0 0 10.66 18.66a1.7 1.7 0 0 0-1.88.34l-.06.06-2.12-2.12.06-.06A1.7 1.7 0 0 0 7 15a1.7 1.7 0 0 0-1.56-1.04h-.08v-3h.08A1.7 1.7 0 0 0 7 9.92a1.7 1.7 0 0 0-.34-1.88L6.6 7.98l2.12-2.12.06.06a1.7 1.7 0 0 0 1.88.34 1.7 1.7 0 0 0 1.04-1.56v-.08h3v.08a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.12 2.12-.06.06A1.7 1.7 0 0 0 19.4 9.92a1.7 1.7 0 0 0 1.56 1.04h.08v3h-.08A1.7 1.7 0 0 0 19.4 15Z"/></svg>

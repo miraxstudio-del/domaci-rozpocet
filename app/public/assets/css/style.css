@@ -1138,3 +1138,100 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
   .dashboard-charts-grid .dashboard-trend-card,
   .dashboard-category-chart-card { min-height: 320px; padding: 20px 17px 15px; }
 }
+
+/* ---- Globální horní lišta a sbalené menu ---- */
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  margin: -36px -36px 28px;
+  padding: 0 36px;
+  border-bottom: 1px solid var(--card-border);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+.app-toolbar-menu,
+.sidebar-collapse-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--control-border);
+  border-radius: 9px;
+  background: var(--control-surface);
+  color: var(--control-text);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 650;
+}
+.app-toolbar-menu:hover,
+.sidebar-collapse-button:hover { border-color: var(--accent); color: var(--accent); }
+.app-toolbar-menu svg,
+.sidebar-collapse-button svg,
+.app-toolbar-add svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.app-toolbar-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.theme-toggle--toolbar {
+  min-height: 36px;
+  padding: 2px;
+  border-radius: 9px;
+  background: var(--control-surface);
+  border: 1px solid var(--control-border);
+  box-shadow: var(--shadow-sm);
+}
+.theme-toggle--toolbar button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 0; padding: 6px 9px; font-size: 12px; }
+.theme-toggle--toolbar button.active { background: var(--accent-soft); color: var(--accent); box-shadow: none; }
+.app-toolbar-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #5544f7, #4938ec);
+  box-shadow: 0 5px 13px rgba(77, 61, 240, .21);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 690;
+  white-space: nowrap;
+}
+.app-toolbar-add:hover { color: #fff; background: linear-gradient(135deg, #4737eb, #3e2ed8); }
+.sidebar-collapse-button { margin-left: auto; width: 34px; padding: 0; }
+
+@media (min-width: 1025px) {
+  .sidebar { transition: width .22s ease; }
+  body.sidebar-collapsed .sidebar { width: 76px; }
+  body.sidebar-collapsed .sidebar-brand { justify-content: center; padding: 22px 10px 14px; }
+  body.sidebar-collapsed .sidebar-brand-copy,
+  body.sidebar-collapsed .sidebar-search,
+  body.sidebar-collapsed .sidebar-collapse-button { display: none; }
+  body.sidebar-collapsed .nav-group { padding: 0 12px; }
+  body.sidebar-collapsed .nav-link { justify-content: center; width: 52px; margin: 0 auto; padding: 8px 0; }
+  body.sidebar-collapsed .nav-link .ic { width: auto; font-size: 19px; }
+  body.sidebar-collapsed .nav-link .nav-label { display: none; }
+}
+
+@media (max-width: 1024px) {
+  .mobile-app-header { margin-bottom: 0; }
+  .app-toolbar { min-height: 52px; margin: 0 -24px 22px; padding: 0 24px; }
+  .app-toolbar-menu { display: none; }
+  .sidebar-collapse-button { display: none; }
+}
+@media (max-width: 760px) {
+  .app-toolbar { margin: 0 -16px 20px; padding: 0 16px; }
+}
+@media (max-width: 560px) {
+  .theme-toggle--toolbar button { width: 36px; padding: 6px 4px; }
+  .toolbar-theme-label { display: none; }
+  .app-toolbar-add { min-width: 38px; padding: 0 10px; }
+  .app-toolbar-add span { display: none; }
+}
+@media print {
+  .app-toolbar { display: none !important; }
+}
