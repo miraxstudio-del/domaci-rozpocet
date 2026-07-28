@@ -18,6 +18,36 @@ Vytvořilo [Mirax Studio®](https://www.miraxstudio.cz) · více o vzniku aplika
 
 ---
 
+## 🆕 Verze a novinky
+
+Přehled změn v jednotlivých vydáních. Novou verzi vždy přidáváme nahoru,
+aby bylo hned vidět, co se v aplikaci změnilo.
+
+### v1.01 — 28. července 2026
+
+**Vizuální vylepšení**
+
+- Kompletně přepracovaný **Přehled**: přehlednější karty, graf vývoje příjmů
+  a výdajů, koláčový graf kategorií a možnost zobrazené prvky zapínat či vypínat.
+- Sjednocený moderní vzhled panelů napříč aplikací, opravené zarovnání karet,
+  mezery a ovládací prvky včetně tmavého režimu.
+- Lepší ovládání na mobilu a tabletu: responzivní rozložení a sbalitelné levé menu.
+- Přehlednější navigace po měsících, kompaktnější ovládání a možnost exportu za
+  vybraný měsíc i celý rok.
+- Bezpečnější distribuce: zdrojový kód je oddělen od přenosného balíčku pro
+  Windows, který je dostupný v GitHub Releases spolu s ověřovacím SHA-256 součtem.
+
+### v1.00 — 28. července 2026
+
+**První veřejné vydání**
+
+- Lokální správa příjmů, výdajů, kategorií, rozpočtů a pravidelných plateb.
+- Doklady, statistiky, měsíční přehledy, exporty a zálohy.
+- Data domácnosti zůstávají na počítači uživatele; aplikace běží lokálně bez
+  registrace, cloudu a telemetrie.
+
+---
+
 ## 🚀 Stažení pro běžné použití (bez instalace)
 
 Fakt to zvládne úplně každý:
@@ -26,10 +56,10 @@ Fakt to zvládne úplně každý:
 2. **Stáhněte** soubor `Domaci-rozpocet-vX.YY-windows-x64.zip` z nejnovějšího vydání.
 3. **Rozbalte** stažený ZIP soubor kamkoliv na disk (např. na Plochu nebo do
    `Dokumenty`).
-3. Přesuňte celou rozbalenou složku tam, kde ji chcete mít trvale uloženou
+4. Přesuňte celou rozbalenou složku tam, kde ji chcete mít trvale uloženou
    (klidně na USB disk, do cloudu apod. — je to jedno).
-4. Ve složce **dvakrát klikněte na `START.bat`**.
-5. Aplikace se sama spustí a otevře v prohlížeči. Hotovo! 🎉
+5. Ve složce **dvakrát klikněte na `START.bat`**.
+6. Aplikace se sama spustí a otevře v prohlížeči. Hotovo! 🎉
 
 Nic dalšího se instalovat nemusí — oficiální release balíček si sebou nese
 vlastní přenosný PHP server, takže funguje i na počítači, kde nikdy nic
