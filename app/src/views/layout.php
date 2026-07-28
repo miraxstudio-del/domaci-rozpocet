@@ -29,6 +29,7 @@ $activeNav = $activeNav ?? '';
       <div class="flash <?= h($f['type']) ?>"><?= h($f['message']) ?></div>
     <?php endforeach; ?>
     <?= $content ?>
+    <?php include __DIR__ . '/partials/footer.php'; ?>
   </main>
 </div>
 <script>window.APP_SETTINGS = { confirmDelete: <?= get_setting('confirm_delete', '1') === '1' ? 'true' : 'false' ?> };</script>

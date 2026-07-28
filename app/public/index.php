@@ -5,7 +5,7 @@ require_once __DIR__ . '/../src/config.php';
 
 $allowedPages = [
     'prehled', 'polozky', 'polozka', 'pravidelne', 'pravidelna', 'rozpocty',
-    'doklady', 'statistiky', 'mesice', 'export', 'zalohy', 'nastaveni', 'kategorie',
+    'doklady', 'statistiky', 'mesice', 'export', 'zalohy', 'nastaveni', 'kategorie', 'o-programu',
 ];
 
 $page = $_GET['p'] ?? 'prehled';

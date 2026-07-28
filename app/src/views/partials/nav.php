@@ -11,6 +11,7 @@ $navItems = [
     'export'      => ['icon' => '⬇️', 'label' => 'Export'],
     'zalohy'      => ['icon' => '💾', 'label' => 'Zálohy'],
     'nastaveni'   => ['icon' => '⚙️', 'label' => 'Nastavení'],
+    'o-programu'  => ['icon' => 'ℹ️', 'label' => 'O programu'],
 ];
 $household = get_setting('household_name', 'Naše domácnost');
 ?>
