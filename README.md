@@ -9,6 +9,8 @@ Běží celá lokálně na vašem počítači — bez instalace, bez internetu, 
 
 Vytvořilo [Mirax Studio](https://www.miraxstudio.cz) · více o vzniku aplikace v sekci [O programu](#-proč-tahle-aplikace-vznikla) níže.
 
+![Náhled aplikace Domácí rozpočet - dashboard s přehledem příjmů, výdajů a kategorií](docs/screenshot-prehled.png)
+
 ---
 
 ## 🚀 Rychlý start (pro úplné laiky, žádná instalace)
