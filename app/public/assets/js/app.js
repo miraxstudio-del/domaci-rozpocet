@@ -31,6 +31,69 @@
   });
 })();
 
+// Přizpůsobení sekce Přehled: volba zobrazených doplňkových widgetů zůstává uložená v prohlížeči.
+(function initDashboardCustomizer() {
+  var dashboard = document.querySelector('.dashboard');
+  if (!dashboard) return;
+
+  var storageKey = 'dashboard-widget-visibility';
+  var defaults = { secondary: true, trend: true, insights: true, categories: true };
+  var toggles = dashboard.querySelectorAll('[data-dashboard-toggle]');
+  var reset = dashboard.querySelector('[data-dashboard-reset]');
+  var preferences = {};
+
+  try {
+    preferences = JSON.parse(localStorage.getItem(storageKey) || '{}');
+  } catch (error) {
+    preferences = {};
+  }
+
+  function visibleFor(key) {
+    return typeof preferences[key] === 'boolean' ? preferences[key] : defaults[key] !== false;
+  }
+
+  function applyWidget(key, visible, announce) {
+    document.querySelectorAll('[data-dashboard-widget="' + key + '"]').forEach(function (widget) {
+      widget.hidden = !visible;
+    });
+    toggles.forEach(function (toggle) {
+      if (toggle.dataset.dashboardToggle === key) toggle.checked = visible;
+    });
+    if (announce) {
+      window.dispatchEvent(new CustomEvent('dashboardwidgetchange', { detail: { key: key, visible: visible } }));
+    }
+  }
+
+  function applyAll(announce) {
+    Object.keys(defaults).forEach(function (key) {
+      applyWidget(key, visibleFor(key), announce);
+    });
+  }
+
+  function save() {
+    localStorage.setItem(storageKey, JSON.stringify(preferences));
+  }
+
+  toggles.forEach(function (toggle) {
+    toggle.addEventListener('change', function () {
+      var key = toggle.dataset.dashboardToggle;
+      preferences[key] = toggle.checked;
+      save();
+      applyWidget(key, toggle.checked, true);
+    });
+  });
+
+  if (reset) {
+    reset.addEventListener('click', function () {
+      preferences = {};
+      localStorage.removeItem(storageKey);
+      applyAll(true);
+    });
+  }
+
+  applyAll(false);
+})();
+
 // Potvrzovací dialog před odstraněním - používá <dialog> nebo confirm() jako fallback
 document.addEventListener('click', function (e) {
   var el = e.target.closest('[data-confirm]');

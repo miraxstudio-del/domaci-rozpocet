@@ -26,6 +26,52 @@ $periodQuery = static fn (string $value): string => http_build_query(
         ? ['p' => 'prehled', 'view' => 'year', 'y' => $value]
         : ['p' => 'prehled', 'm' => $value]
 );
+
+$dashboardTrend = [];
+if ($view === 'year') {
+    for ($month = 1; $month <= 12; $month++) {
+        $monthYear = sprintf('%s-%02d', $period, $month);
+        $monthSummary = month_summary($monthYear);
+        $dashboardTrend[] = [
+            'month_year' => $monthYear,
+            'label' => month_year_label($monthYear),
+            'axis_label' => sprintf('%02d', $month),
+            'income' => (float) $monthSummary['income'],
+            'expense' => (float) $monthSummary['expense'],
+        ];
+    }
+} else {
+    for ($offset = 5; $offset >= 0; $offset--) {
+        $monthYear = shift_month($period, -$offset);
+        $monthSummary = month_summary($monthYear);
+        $dashboardTrend[] = [
+            'month_year' => $monthYear,
+            'label' => month_year_label($monthYear),
+            'axis_label' => substr($monthYear, 5, 2) . '/' . substr($monthYear, 0, 4),
+            'income' => (float) $monthSummary['income'],
+            'expense' => (float) $monthSummary['expense'],
+        ];
+    }
+}
+
+$dashboardTrendSeries = [
+    'income' => array_map(static fn (array $item): array => [
+        'x' => $item['month_year'],
+        'y' => $item['income'],
+        'label' => $item['label'],
+        'axisLabel' => $item['axis_label'],
+        'valueLabel' => format_money($item['income']),
+        'href' => '/index.php?p=prehled&m=' . $item['month_year'],
+    ], $dashboardTrend),
+    'expense' => array_map(static fn (array $item): array => [
+        'x' => $item['month_year'],
+        'y' => $item['expense'],
+        'label' => $item['label'],
+        'axisLabel' => $item['axis_label'],
+        'valueLabel' => format_money($item['expense']),
+        'href' => '/index.php?p=prehled&m=' . $item['month_year'],
+    ], $dashboardTrend),
+];
 ?>
 <div class="dashboard">
   <div class="topbar dashboard-topbar">
@@ -57,6 +103,28 @@ $periodQuery = static fn (string $value): string => http_build_query(
         Přidat položku
       </a>
     </div>
+  </div>
+
+  <div class="dashboard-customize-row">
+    <details class="dashboard-customizer">
+      <summary>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.12 2.12-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.04 1.56V20.3h-3v-.08A1.7 1.7 0 0 0 10.66 18.66a1.7 1.7 0 0 0-1.88.34l-.06.06-2.12-2.12.06-.06A1.7 1.7 0 0 0 7 15a1.7 1.7 0 0 0-1.56-1.04h-.08v-3h.08A1.7 1.7 0 0 0 7 9.92a1.7 1.7 0 0 0-.34-1.88L6.6 7.98l2.12-2.12.06.06a1.7 1.7 0 0 0 1.88.34 1.7 1.7 0 0 0 1.04-1.56v-.08h3v.08a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.12 2.12-.06.06A1.7 1.7 0 0 0 19.4 9.92a1.7 1.7 0 0 0 1.56 1.04h.08v3h-.08A1.7 1.7 0 0 0 19.4 15Z"/></svg>
+        Upravit přehled
+      </summary>
+      <div class="dashboard-customizer-panel">
+        <div class="dashboard-customizer-heading">
+          <strong>Co chcete v Přehledu vidět?</strong>
+          <p>Hlavní souhrn zůstává vždy zobrazený.</p>
+        </div>
+        <div class="dashboard-widget-options">
+          <label><input type="checkbox" data-dashboard-toggle="secondary" checked><span>Doplňující metriky</span></label>
+          <label><input type="checkbox" data-dashboard-toggle="trend" checked><span>Graf příjmů a výdajů</span></label>
+          <label><input type="checkbox" data-dashboard-toggle="insights" checked><span>Důležité informace</span></label>
+          <label><input type="checkbox" data-dashboard-toggle="categories" checked><span>Výdaje podle kategorií</span></label>
+        </div>
+        <button class="dashboard-reset-layout" type="button" data-dashboard-reset>Obnovit výchozí</button>
+      </div>
+    </details>
   </div>
 
   <section class="dashboard-primary-stats" aria-label="Hlavní souhrn">
@@ -102,7 +170,22 @@ $periodQuery = static fn (string $value): string => http_build_query(
     </article>
   </section>
 
-  <section class="dashboard-secondary-stats" aria-label="Doplňující souhrn">
+  <section class="dashboard-trend-card" data-dashboard-widget="trend" aria-labelledby="dashboard-trend-title">
+    <div class="dashboard-trend-heading">
+      <div>
+        <h2 id="dashboard-trend-title">Vývoj příjmů a výdajů</h2>
+        <p><?= $view === 'year' ? 'Jednotlivé měsíce vybraného roku' : 'Posledních šest měsíců do zvoleného období' ?></p>
+      </div>
+      <div class="dashboard-trend-legend" aria-label="Legenda grafu">
+        <span class="income"><i></i>Příjmy</span>
+        <span class="expense"><i></i>Výdaje</span>
+      </div>
+    </div>
+    <canvas class="chart dashboard-trend-chart" id="dashboard-trend-chart"></canvas>
+    <p class="dashboard-trend-hint">Kliknutím na bod grafu otevřete daný měsíc.</p>
+  </section>
+
+  <section class="dashboard-secondary-stats" data-dashboard-widget="secondary" aria-label="Doplňující souhrn">
     <article class="dashboard-stat-card dashboard-stat-card--secondary">
       <div class="dashboard-stat-icon dashboard-stat-icon--blue">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h3"/></svg>
@@ -137,7 +220,7 @@ $periodQuery = static fn (string $value): string => http_build_query(
     </article>
   </section>
 
-  <section class="dashboard-insights" aria-label="Důležité informace">
+  <section class="dashboard-insights" data-dashboard-widget="insights" aria-label="Důležité informace">
     <article class="dashboard-insight-card">
       <h2><span class="dashboard-insight-icon danger">✹</span>Největší výdaj <?= $view === 'year' ? 'roku' : 'měsíce' ?></h2>
       <?php if ($s['biggest_expense']): $b = $s['biggest_expense']; ?>
@@ -177,7 +260,7 @@ $periodQuery = static fn (string $value): string => http_build_query(
   </section>
 
   <?php $cats = array_slice(category_breakdown($period, 'vydaj'), 0, 8); ?>
-  <section class="dashboard-category-card" aria-labelledby="dashboard-category-title">
+  <section class="dashboard-category-card" data-dashboard-widget="categories" aria-labelledby="dashboard-category-title">
     <div class="dashboard-category-heading">
       <h2 id="dashboard-category-title">Výdaje podle kategorií</h2>
       <a class="dashboard-detail-button" href="/index.php?p=statistiky&amp;<?= $view === 'year' ? 'view=year&amp;y=' . h($period) : 'm=' . h($period) ?>">Podrobné statistiky <span aria-hidden="true">→</span></a>
@@ -198,3 +281,30 @@ $periodQuery = static fn (string $value): string => http_build_query(
     <?php endif; ?>
   </section>
 </div>
+<script>
+(function () {
+  var canvas = document.getElementById('dashboard-trend-chart');
+  var series = <?= json_encode($dashboardTrendSeries, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
+
+  function renderTrend() {
+    if (!canvas || !window.drawLineChart || canvas.closest('[hidden]')) return;
+    window.drawLineChart(canvas, [
+      {
+        name: 'Příjmy',
+        color: getComputedStyle(document.documentElement).getPropertyValue('--income').trim() || '#16a34a',
+        points: series.income
+      },
+      {
+        name: 'Výdaje',
+        color: getComputedStyle(document.documentElement).getPropertyValue('--expense').trim() || '#dc2626',
+        points: series.expense
+      }
+    ], { height: 248 });
+  }
+
+  window.addEventListener('DOMContentLoaded', renderTrend);
+  window.addEventListener('dashboardwidgetchange', function (event) {
+    if (!event.detail || event.detail.key === 'trend') renderTrend();
+  });
+})();
+</script>

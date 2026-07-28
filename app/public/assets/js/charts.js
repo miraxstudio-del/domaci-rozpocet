@@ -239,7 +239,7 @@ window.CHART_PALETTE = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '
     ctx.textAlign = 'center';
     series[0].points.forEach(function (p, i) {
       var x = padding.left + i * stepX;
-      ctx.fillText(p.label, x, H - padding.bottom + 18);
+      ctx.fillText(p.axisLabel || p.label, x, H - padding.bottom + 18);
     });
 
     attachInteractions(canvas, regions, function (d) { return d.label + ': ' + (d.valueLabel || d.value); });
