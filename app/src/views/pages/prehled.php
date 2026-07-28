@@ -129,8 +129,8 @@ $dashboardTrendSeries = [
 
   <section class="dashboard-primary-stats" aria-label="Hlavní souhrn">
     <article class="dashboard-stat-card dashboard-stat-card--primary">
-      <div class="dashboard-stat-icon dashboard-stat-icon--income">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 14v2a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-2"/></svg>
+      <div class="dashboard-stat-icon dashboard-stat-icon--income dashboard-stat-icon--illustration">
+        <img src="/assets/images/income-wallet.png" alt="" width="256" height="256">
       </div>
       <div class="dashboard-stat-copy">
         <div class="dashboard-stat-label">Celkové příjmy</div>
@@ -144,8 +144,8 @@ $dashboardTrendSeries = [
     </article>
 
     <article class="dashboard-stat-card dashboard-stat-card--primary">
-      <div class="dashboard-stat-icon dashboard-stat-icon--expense">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V9m0 0-4 4m4-4 4 4M5 10V8a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/></svg>
+      <div class="dashboard-stat-icon dashboard-stat-icon--expense dashboard-stat-icon--illustration">
+        <img src="/assets/images/expense-receipt.png" alt="" width="256" height="256">
       </div>
       <div class="dashboard-stat-copy">
         <div class="dashboard-stat-label">Celkové výdaje</div>
@@ -159,8 +159,8 @@ $dashboardTrendSeries = [
     </article>
 
     <article class="dashboard-stat-card dashboard-stat-card--primary">
-      <div class="dashboard-stat-icon dashboard-stat-icon--balance">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 15 4-4 4 4 6-7m0 0v5m0-5h-5"/></svg>
+      <div class="dashboard-stat-icon dashboard-stat-icon--balance dashboard-stat-icon--illustration">
+        <img src="/assets/images/balance-chart.png" alt="" width="256" height="256">
       </div>
       <div class="dashboard-stat-copy">
         <div class="dashboard-stat-label">Zbývá z příjmů</div>
@@ -187,20 +187,20 @@ $dashboardTrendSeries = [
 
   <section class="dashboard-secondary-stats" data-dashboard-widget="secondary" aria-label="Doplňující souhrn">
     <article class="dashboard-stat-card dashboard-stat-card--secondary">
-      <div class="dashboard-stat-icon dashboard-stat-icon--blue">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h3"/></svg>
+      <div class="dashboard-stat-icon dashboard-stat-icon--blue dashboard-stat-icon--illustration">
+        <img src="/assets/images/recurring-calendar.png" alt="" width="256" height="256">
       </div>
       <div class="dashboard-stat-copy"><div class="dashboard-stat-label">Pravidelné výdaje</div><div class="dashboard-stat-value"><?= format_money($s['regular']) ?></div></div>
     </article>
     <article class="dashboard-stat-card dashboard-stat-card--secondary">
-      <div class="dashboard-stat-icon dashboard-stat-icon--blue">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 10h18"/></svg>
+      <div class="dashboard-stat-icon dashboard-stat-icon--blue dashboard-stat-icon--illustration">
+        <img src="/assets/images/onetime-calendar.png" alt="" width="256" height="256">
       </div>
       <div class="dashboard-stat-copy"><div class="dashboard-stat-label">Jednorázové výdaje</div><div class="dashboard-stat-value"><?= format_money($s['onetime']) ?></div></div>
     </article>
     <article class="dashboard-stat-card dashboard-stat-card--secondary">
-      <div class="dashboard-stat-icon dashboard-stat-icon--warning">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10M7 21h10M8 3c0 5 3 5 3 9s-3 4-3 9m8-18c0 5-3 5-3 9s3 4 3 9M8 12h8"/></svg>
+      <div class="dashboard-stat-icon dashboard-stat-icon--warning dashboard-stat-icon--illustration">
+        <img src="/assets/images/unpaid-hourglass.png" alt="" width="256" height="256">
       </div>
       <div class="dashboard-stat-copy">
         <div class="dashboard-stat-label">Nezaplacené platby</div>
@@ -209,8 +209,8 @@ $dashboardTrendSeries = [
       </div>
     </article>
     <article class="dashboard-stat-card dashboard-stat-card--secondary">
-      <div class="dashboard-stat-icon dashboard-stat-icon--purple">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5Z"/><path d="M14 2v5h5M9 13h6m-6 4h6"/></svg>
+      <div class="dashboard-stat-icon dashboard-stat-icon--purple dashboard-stat-icon--illustration">
+        <img src="/assets/images/documents-folder.png" alt="" width="256" height="256">
       </div>
       <div class="dashboard-stat-copy">
         <div class="dashboard-stat-label">Uložené doklady</div>
