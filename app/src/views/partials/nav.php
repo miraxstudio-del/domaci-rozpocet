@@ -25,7 +25,7 @@ $household = get_setting('household_name', 'Naše domácnost');
   </div>
   <form method="get" action="/index.php" class="sidebar-search">
     <input type="hidden" name="p" value="polozky">
-    <input type="search" name="q" placeholder="🔎 Hledat položky..." value="<?= h($_GET['q'] ?? '') ?>">
+    <input type="search" name="q" placeholder="Hledat položky..." value="<?= h($_GET['q'] ?? '') ?>">
   </form>
   <nav class="nav-group">
     <?php foreach ($navItems as $key => $item): ?>
