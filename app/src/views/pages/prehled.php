@@ -72,6 +72,23 @@ $dashboardTrendSeries = [
         'href' => '/index.php?p=prehled&m=' . $item['month_year'],
     ], $dashboardTrend),
 ];
+
+$dashboardCategoryRows = array_slice(category_breakdown($period, 'vydaj'), 0, 5);
+$dashboardCategoryTotal = array_sum(array_map(static fn (array $category): float => (float) $category['total'], $dashboardCategoryRows));
+$dashboardItemFilter = $view === 'year' ? 'year=' . rawurlencode($period) : 'month_year=' . rawurlencode($period);
+$dashboardCategorySeries = [];
+foreach ($dashboardCategoryRows as $index => $category) {
+    $total = (float) $category['total'];
+    $dashboardCategorySeries[] = [
+        'label' => $category['cat_name'] ?: 'Nezařazeno',
+        'icon' => $category['cat_icon'] ?: '📦',
+        'value' => $total,
+        'valueLabel' => format_money($total),
+        'percentage' => $dashboardCategoryTotal > 0 ? round(($total / $dashboardCategoryTotal) * 100) : 0,
+        'color' => $category['cat_color'] ?: palette_color($index),
+        'href' => '/index.php?p=polozky&' . $dashboardItemFilter . '&category_id=' . (int) $category['cat_id'],
+    ];
+}
 ?>
 <div class="dashboard">
   <div class="topbar dashboard-topbar">
@@ -167,20 +184,44 @@ $dashboardTrendSeries = [
     </article>
   </section>
 
-  <section class="dashboard-trend-card" data-dashboard-widget="trend" aria-labelledby="dashboard-trend-title">
-    <div class="dashboard-trend-heading">
-      <div>
-        <h2 id="dashboard-trend-title">Vývoj příjmů a výdajů</h2>
-        <p><?= $view === 'year' ? 'Jednotlivé měsíce vybraného roku' : 'Posledních šest měsíců do zvoleného období' ?></p>
+  <div class="dashboard-charts-grid">
+    <section class="dashboard-trend-card" data-dashboard-widget="trend" aria-labelledby="dashboard-trend-title">
+      <div class="dashboard-trend-heading">
+        <div>
+          <h2 id="dashboard-trend-title">Vývoj příjmů a výdajů</h2>
+          <p><?= $view === 'year' ? 'Jednotlivé měsíce vybraného roku' : 'Posledních šest měsíců do zvoleného období' ?></p>
+        </div>
+        <div class="dashboard-trend-legend" aria-label="Legenda grafu">
+          <span class="income"><i></i>Příjmy</span>
+          <span class="expense"><i></i>Výdaje</span>
+        </div>
       </div>
-      <div class="dashboard-trend-legend" aria-label="Legenda grafu">
-        <span class="income"><i></i>Příjmy</span>
-        <span class="expense"><i></i>Výdaje</span>
+      <canvas class="chart dashboard-trend-chart" id="dashboard-trend-chart"></canvas>
+      <p class="dashboard-trend-hint">Kliknutím na bod grafu otevřete daný měsíc.</p>
+    </section>
+
+    <section class="dashboard-category-chart-card" data-dashboard-widget="categories" aria-labelledby="dashboard-category-chart-title">
+      <div class="dashboard-category-chart-heading">
+        <div>
+          <h2 id="dashboard-category-chart-title">Rozložení výdajů</h2>
+          <p>Největší kategorie v období</p>
+        </div>
+        <a class="dashboard-chart-link" href="/index.php?p=statistiky&amp;<?= $view === 'year' ? 'view=year&amp;y=' . h($period) : 'm=' . h($period) ?>">Detail →</a>
       </div>
-    </div>
-    <canvas class="chart dashboard-trend-chart" id="dashboard-trend-chart"></canvas>
-    <p class="dashboard-trend-hint">Kliknutím na bod grafu otevřete daný měsíc.</p>
-  </section>
+      <div class="dashboard-category-chart-canvas"><canvas class="chart" id="dashboard-category-chart"></canvas></div>
+      <?php if ($dashboardCategorySeries): ?>
+        <div class="dashboard-category-chart-legend">
+          <?php foreach ($dashboardCategorySeries as $category): ?>
+            <a href="<?= h($category['href']) ?>">
+              <i style="background:<?= h($category['color']) ?>"></i>
+              <span><?= h($category['icon'] . ' ' . $category['label']) ?></span>
+              <strong><?= (int) $category['percentage'] ?>&nbsp;%</strong>
+            </a>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
+    </section>
+  </div>
 
   <section class="dashboard-secondary-stats" data-dashboard-widget="secondary" aria-label="Doplňující souhrn">
     <article class="dashboard-stat-card dashboard-stat-card--secondary">
@@ -256,32 +297,13 @@ $dashboardTrendSeries = [
     </article>
   </section>
 
-  <?php $cats = array_slice(category_breakdown($period, 'vydaj'), 0, 8); ?>
-  <section class="dashboard-category-card" data-dashboard-widget="categories" aria-labelledby="dashboard-category-title">
-    <div class="dashboard-category-heading">
-      <h2 id="dashboard-category-title">Výdaje podle kategorií</h2>
-      <a class="dashboard-detail-button" href="/index.php?p=statistiky&amp;<?= $view === 'year' ? 'view=year&amp;y=' . h($period) : 'm=' . h($period) ?>">Podrobné statistiky <span aria-hidden="true">→</span></a>
-    </div>
-    <?php if (!$cats): ?>
-      <p class="dashboard-empty-copy">Zatím nejsou zaznamenané žádné výdaje.</p>
-    <?php else: ?>
-      <div class="dashboard-category-list">
-        <?php $max = max(array_column($cats, 'total')) ?: 1; ?>
-        <?php foreach ($cats as $c): ?>
-          <div class="dashboard-category-row">
-            <div class="dashboard-category-name"><?= h(($c['cat_icon'] ?: '📦') . ' ' . ($c['cat_name'] ?: 'Nezařazeno')) ?></div>
-            <div class="progress"><div style="width:<?= round(($c['total'] / $max) * 100) ?>%; background:<?= h($c['cat_color'] ?: '#6b7280') ?>;"></div></div>
-            <div class="dashboard-category-total"><?= format_money((float) $c['total']) ?></div>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    <?php endif; ?>
-  </section>
 </div>
 <script>
 (function () {
   var canvas = document.getElementById('dashboard-trend-chart');
   var series = <?= json_encode($dashboardTrendSeries, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
+  var categoryCanvas = document.getElementById('dashboard-category-chart');
+  var categorySeries = <?= json_encode($dashboardCategorySeries, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
 
   function renderTrend() {
     if (!canvas || !window.drawLineChart || canvas.closest('[hidden]')) return;
@@ -299,9 +321,22 @@ $dashboardTrendSeries = [
     ], { height: 248 });
   }
 
-  window.addEventListener('DOMContentLoaded', renderTrend);
+  function renderCategoryChart() {
+    if (!categoryCanvas || !window.drawDonutChart || categoryCanvas.closest('[hidden]')) return;
+    window.drawDonutChart(categoryCanvas, categorySeries, {
+      height: 188,
+      centerLabel: <?= json_encode(format_money($dashboardCategoryTotal, 0)) ?>,
+      centerSubLabel: 'výdajů'
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', function () {
+    renderTrend();
+    renderCategoryChart();
+  });
   window.addEventListener('dashboardwidgetchange', function (event) {
     if (!event.detail || event.detail.key === 'trend') renderTrend();
+    if (!event.detail || event.detail.key === 'categories') renderCategoryChart();
   });
 })();
 </script>

@@ -105,6 +105,16 @@
     return typeof preferences[key] === 'boolean' ? preferences[key] : defaults[key] !== false;
   }
 
+  function syncChartLayout() {
+    var chartGrid = dashboard.querySelector('.dashboard-charts-grid');
+    if (!chartGrid) return;
+
+    var trendVisible = visibleFor('trend');
+    var categoriesVisible = visibleFor('categories');
+    chartGrid.hidden = !trendVisible && !categoriesVisible;
+    chartGrid.classList.toggle('dashboard-charts-grid--single', trendVisible !== categoriesVisible);
+  }
+
   function applyWidget(key, visible, announce) {
     document.querySelectorAll('[data-dashboard-widget="' + key + '"]').forEach(function (widget) {
       widget.hidden = !visible;
@@ -112,6 +122,7 @@
     toggles.forEach(function (toggle) {
       if (toggle.dataset.dashboardToggle === key) toggle.checked = visible;
     });
+    if (key === 'trend' || key === 'categories') syncChartLayout();
     if (announce) {
       window.dispatchEvent(new CustomEvent('dashboardwidgetchange', { detail: { key: key, visible: visible } }));
     }

@@ -1082,3 +1082,59 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
   .dashboard-month-switch .current { min-width: 0; font-size: 16px; }
   .dashboard-customizer { margin-left: auto; }
 }
+
+/* ---- Přehled: sjednocená typografie a dvojice grafů ---- */
+.dashboard-heading h1 { font-size: 22px; font-weight: 700; letter-spacing: normal; }
+.dashboard-heading .subtitle { margin-top: 2px; font-size: 13px; }
+
+.dashboard-charts-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(310px, .9fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+.dashboard-charts-grid--single { grid-template-columns: minmax(0, 1fr); }
+.dashboard-charts-grid .dashboard-trend-card {
+  min-height: 336px;
+  margin-top: 0;
+}
+.dashboard-category-chart-card {
+  min-height: 336px;
+  padding: 22px 22px 17px;
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  background: var(--dashboard-surface);
+  box-shadow: var(--shadow-sm);
+}
+.dashboard-category-chart-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.dashboard-category-chart-heading h2 { margin: 0; color: var(--text); font-size: 16px; font-weight: 740; letter-spacing: -.025em; }
+.dashboard-category-chart-heading p { margin: 5px 0 0; color: var(--dashboard-copy); font-size: 13px; }
+.dashboard-chart-link { flex: 0 0 auto; padding-top: 2px; color: var(--accent); font-size: 12px; font-weight: 670; }
+.dashboard-chart-link:hover { color: var(--accent-hover); }
+.dashboard-category-chart-canvas { width: min(208px, 100%); margin: 9px auto 4px; }
+.dashboard-category-chart-canvas .chart { width: 100%; margin: 0; }
+.dashboard-category-chart-legend { display: grid; gap: 4px; margin-top: 2px; }
+.dashboard-category-chart-legend a {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  padding: 0 4px;
+  border-radius: 6px;
+  color: var(--dashboard-muted);
+  font-size: 12px;
+}
+.dashboard-category-chart-legend a:hover { background: var(--neutral-soft); color: var(--text); }
+.dashboard-category-chart-legend i { width: 8px; height: 8px; border-radius: 50%; }
+.dashboard-category-chart-legend span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dashboard-category-chart-legend strong { color: var(--text); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 900px) {
+  .dashboard-charts-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .dashboard-charts-grid { gap: 16px; margin-top: 20px; }
+  .dashboard-charts-grid .dashboard-trend-card,
+  .dashboard-category-chart-card { min-height: 320px; padding: 20px 17px 15px; }
+}
