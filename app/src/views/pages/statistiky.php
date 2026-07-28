@@ -121,6 +121,13 @@ if ($view === 'year') {
   <div class="card">
     <h3>Způsob placení</h3>
     <canvas class="chart" id="chart-methods"></canvas>
+    <?php if ($methodChartData): ?>
+      <?= chart_legend_html(array_map(fn ($m, $i) => [
+          'label' => $m['label'], 'color' => palette_color($i), 'value' => $m['valueLabel'],
+      ], $methodChartData, array_keys($methodChartData))) ?>
+    <?php else: ?>
+      <p class="text-muted" style="font-size:13px;margin-top:10px;">Zatím žádné výdaje.</p>
+    <?php endif; ?>
   </div>
 </div>
 
