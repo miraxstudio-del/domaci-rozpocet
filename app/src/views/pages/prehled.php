@@ -133,7 +133,7 @@ foreach ($dashboardCategoryRows as $index => $category) {
             <label><input type="checkbox" data-dashboard-toggle="secondary" checked><span>Doplňující metriky</span></label>
             <label><input type="checkbox" data-dashboard-toggle="trend" checked><span>Graf příjmů a výdajů</span></label>
             <label><input type="checkbox" data-dashboard-toggle="insights" checked><span>Důležité informace</span></label>
-            <label><input type="checkbox" data-dashboard-toggle="categories" checked><span>Výdaje podle kategorií</span></label>
+            <label><input type="checkbox" data-dashboard-toggle="categories" checked><span>Koláč výdajů podle kategorií</span></label>
           </div>
           <button class="dashboard-reset-layout" type="button" data-dashboard-reset>Obnovit výchozí</button>
         </div>

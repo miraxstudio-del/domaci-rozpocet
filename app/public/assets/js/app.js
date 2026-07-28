@@ -89,7 +89,9 @@
   var dashboard = document.querySelector('.dashboard');
   if (!dashboard) return;
 
-  var storageKey = 'dashboard-widget-visibility';
+  // Nové rozvržení grafů má vlastní výchozí stav, aby se zobrazil i uživatelům
+  // se starším uloženým nastavením původního panelu kategorií.
+  var storageKey = 'dashboard-widget-visibility-v2';
   var defaults = { secondary: true, trend: true, insights: true, categories: true };
   var toggles = dashboard.querySelectorAll('[data-dashboard-toggle]');
   var reset = dashboard.querySelector('[data-dashboard-reset]');

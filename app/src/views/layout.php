@@ -4,6 +4,10 @@
 /** @var string $activeNav */
 $pageTitle = $pageTitle ?? APP_NAME;
 $activeNav = $activeNav ?? '';
+$assetsPath = dirname(__DIR__, 2) . '/public/assets';
+$styleVersion = (string) (filemtime($assetsPath . '/css/style.css') ?: 1);
+$chartsVersion = (string) (filemtime($assetsPath . '/js/charts.js') ?: 1);
+$appVersion = (string) (filemtime($assetsPath . '/js/app.js') ?: 1);
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -11,7 +15,7 @@ $activeNav = $activeNav ?? '';
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= h($pageTitle) ?> · <?= h(APP_NAME) ?></title>
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css?v=<?= h($styleVersion) ?>">
 <script>
 (function () {
   var saved = localStorage.getItem('theme') || 'system';
@@ -43,7 +47,7 @@ $activeNav = $activeNav ?? '';
 </div>
 <script>window.APP_SETTINGS = { confirmDelete: <?= get_setting('confirm_delete', '1') === '1' ? 'true' : 'false' ?> };</script>
 <?php include __DIR__ . '/partials/delete_dialog.php'; ?>
-<script src="/assets/js/charts.js"></script>
-<script src="/assets/js/app.js"></script>
+<script src="/assets/js/charts.js?v=<?= h($chartsVersion) ?>"></script>
+<script src="/assets/js/app.js?v=<?= h($appVersion) ?>"></script>
 </body>
 </html>
