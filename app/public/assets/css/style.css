@@ -1049,3 +1049,36 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
   .mobile-app-header,
   .sidebar-backdrop { display: none !important; }
 }
+
+/* ---- Přehled: kompaktní jednřádková lišta akcí ---- */
+.dashboard-topbar {
+  grid-template-columns: minmax(230px, 1fr) auto auto;
+  align-items: center;
+  gap: 18px;
+}
+.dashboard-month-switch { gap: 10px; padding-top: 0; }
+.dashboard-icon-button { width: 44px; }
+.dashboard-month-switch .current { min-width: 160px; }
+.dashboard-today { min-width: 114px; padding: 0 15px; }
+.dashboard-actions { min-width: 0; gap: 12px; padding-top: 0; }
+.dashboard-period-tabs a { min-width: 70px; }
+.dashboard-add-button { min-width: 160px; padding: 0 17px; }
+
+@media (max-width: 1280px) {
+  .dashboard-topbar { grid-template-columns: 1fr auto; }
+  .dashboard-month-switch { grid-column: 1; grid-row: 2; }
+  .dashboard-actions { grid-column: 2; grid-row: 2; }
+}
+@media (max-width: 900px) {
+  .dashboard-topbar { display: flex; flex-wrap: wrap; }
+  .dashboard-month-switch { order: 3; }
+  .dashboard-actions { margin-left: auto; }
+}
+@media (max-width: 640px) {
+  .dashboard-actions { width: 100%; margin-left: 0; justify-content: space-between; gap: 12px; }
+  .dashboard-period-tabs a { min-width: 64px; }
+  .dashboard-add-button { padding: 0 14px; }
+  .dashboard-month-switch { width: 100%; justify-content: space-between; gap: 5px; }
+  .dashboard-month-switch .current { min-width: 0; font-size: 16px; }
+  .dashboard-customizer { margin-left: auto; }
+}

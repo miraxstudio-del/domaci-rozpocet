@@ -102,29 +102,26 @@ $dashboardTrendSeries = [
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         Přidat položku
       </a>
+      <details class="dashboard-customizer">
+        <summary>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.12 2.12-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.04 1.56V20.3h-3v-.08A1.7 1.7 0 0 0 10.66 18.66a1.7 1.7 0 0 0-1.88.34l-.06.06-2.12-2.12.06-.06A1.7 1.7 0 0 0 7 15a1.7 1.7 0 0 0-1.56-1.04h-.08v-3h.08A1.7 1.7 0 0 0 7 9.92a1.7 1.7 0 0 0-.34-1.88L6.6 7.98l2.12-2.12.06.06a1.7 1.7 0 0 0 1.88.34 1.7 1.7 0 0 0 1.04-1.56v-.08h3v.08a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.12 2.12-.06.06A1.7 1.7 0 0 0 19.4 9.92a1.7 1.7 0 0 0 1.56 1.04h.08v3h-.08A1.7 1.7 0 0 0 19.4 15Z"/></svg>
+          Upravit přehled
+        </summary>
+        <div class="dashboard-customizer-panel">
+          <div class="dashboard-customizer-heading">
+            <strong>Co chcete v Přehledu vidět?</strong>
+            <p>Hlavní souhrn zůstává vždy zobrazený.</p>
+          </div>
+          <div class="dashboard-widget-options">
+            <label><input type="checkbox" data-dashboard-toggle="secondary" checked><span>Doplňující metriky</span></label>
+            <label><input type="checkbox" data-dashboard-toggle="trend" checked><span>Graf příjmů a výdajů</span></label>
+            <label><input type="checkbox" data-dashboard-toggle="insights" checked><span>Důležité informace</span></label>
+            <label><input type="checkbox" data-dashboard-toggle="categories" checked><span>Výdaje podle kategorií</span></label>
+          </div>
+          <button class="dashboard-reset-layout" type="button" data-dashboard-reset>Obnovit výchozí</button>
+        </div>
+      </details>
     </div>
-  </div>
-
-  <div class="dashboard-customize-row">
-    <details class="dashboard-customizer">
-      <summary>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.12 2.12-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.04 1.56V20.3h-3v-.08A1.7 1.7 0 0 0 10.66 18.66a1.7 1.7 0 0 0-1.88.34l-.06.06-2.12-2.12.06-.06A1.7 1.7 0 0 0 7 15a1.7 1.7 0 0 0-1.56-1.04h-.08v-3h.08A1.7 1.7 0 0 0 7 9.92a1.7 1.7 0 0 0-.34-1.88L6.6 7.98l2.12-2.12.06.06a1.7 1.7 0 0 0 1.88.34 1.7 1.7 0 0 0 1.04-1.56v-.08h3v.08a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.12 2.12-.06.06A1.7 1.7 0 0 0 19.4 9.92a1.7 1.7 0 0 0 1.56 1.04h.08v3h-.08A1.7 1.7 0 0 0 19.4 15Z"/></svg>
-        Upravit přehled
-      </summary>
-      <div class="dashboard-customizer-panel">
-        <div class="dashboard-customizer-heading">
-          <strong>Co chcete v Přehledu vidět?</strong>
-          <p>Hlavní souhrn zůstává vždy zobrazený.</p>
-        </div>
-        <div class="dashboard-widget-options">
-          <label><input type="checkbox" data-dashboard-toggle="secondary" checked><span>Doplňující metriky</span></label>
-          <label><input type="checkbox" data-dashboard-toggle="trend" checked><span>Graf příjmů a výdajů</span></label>
-          <label><input type="checkbox" data-dashboard-toggle="insights" checked><span>Důležité informace</span></label>
-          <label><input type="checkbox" data-dashboard-toggle="categories" checked><span>Výdaje podle kategorií</span></label>
-        </div>
-        <button class="dashboard-reset-layout" type="button" data-dashboard-reset>Obnovit výchozí</button>
-      </div>
-    </details>
   </div>
 
   <section class="dashboard-primary-stats" aria-label="Hlavní souhrn">
