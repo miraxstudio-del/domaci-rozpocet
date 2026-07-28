@@ -27,13 +27,14 @@ if ($compareWith && preg_match('/^\d{4}-\d{2}$/', $compareWith)) {
     <h1>🗓️ Měsíce</h1>
     <div class="subtitle">Podrobný měsíční přehled a uzavírání měsíců</div>
   </div>
-  <div class="month-switch">
-    <a class="btn outline icon-only" href="/index.php?p=mesice&m=<?= h($prevM) ?>">‹</a>
-    <form method="get" action="/index.php" style="display:flex;gap:4px;">
-      <input type="hidden" name="p" value="mesice">
-      <input type="month" name="m" value="<?= h($monthYear) ?>" onchange="this.form.submit()">
-    </form>
-    <a class="btn outline icon-only" href="/index.php?p=mesice&m=<?= h($nextM) ?>">›</a>
+  <div class="month-switch dashboard-month-switch" aria-label="Výběr měsíce">
+    <a class="dashboard-icon-button" href="/index.php?p=mesice&m=<?= h($prevM) ?>" title="Předchozí měsíc" aria-label="Předchozí měsíc">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+    </a>
+    <div class="current"><?= h(month_year_label($monthYear)) ?></div>
+    <a class="dashboard-icon-button" href="/index.php?p=mesice&m=<?= h($nextM) ?>" title="Další měsíc" aria-label="Další měsíc">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
   </div>
   <div class="btn-row">
     <button type="button" class="btn secondary" onclick="window.print()">🖨️ Tisk / PDF</button>
