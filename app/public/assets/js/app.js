@@ -52,9 +52,6 @@
       control.setAttribute('aria-label', active ? 'Rozbalit levé menu' : 'Sbalit levé menu');
       control.setAttribute('title', active ? 'Rozbalit levé menu' : 'Sbalit levé menu');
     });
-    document.querySelectorAll('[data-sidebar-collapse-text]').forEach(function (label) {
-      label.textContent = active ? 'Rozbalit menu' : 'Menu';
-    });
   }
 
   controls.forEach(function (control) {

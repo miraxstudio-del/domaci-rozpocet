@@ -39,10 +39,6 @@ $appVersion = (string) (filemtime($assetsPath . '/js/app.js') ?: 1);
       </a>
     </div>
     <div class="app-toolbar" aria-label="Rychlé akce">
-      <button class="app-toolbar-menu" type="button" data-sidebar-collapse aria-controls="app-sidebar" aria-expanded="true" aria-label="Sbalit levé menu" title="Sbalit levé menu">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16M9 9l-3 3 3 3"/></svg>
-        <span data-sidebar-collapse-text>Menu</span>
-      </button>
       <div class="app-toolbar-actions">
         <div class="theme-toggle theme-toggle--toolbar" id="theme-toggle" aria-label="Vzhled aplikace">
           <button type="button" data-theme-value="light" title="Světlý režim" aria-label="Světlý režim"><span aria-hidden="true">☀️</span><span class="toolbar-theme-label">Světlý</span></button>
