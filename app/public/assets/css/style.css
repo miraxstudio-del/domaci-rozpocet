@@ -1209,7 +1209,7 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
   body.sidebar-collapsed .sidebar-brand-copy,
   body.sidebar-collapsed .sidebar-search { display: none; }
   body.sidebar-collapsed .nav-group { padding: 0 12px; }
-  body.sidebar-collapsed .nav-link { justify-content: center; width: 52px; margin: 0 auto; padding: 8px 0; }
+  body.sidebar-collapsed .nav-link { justify-content: center; width: 52px; margin: 0 auto 4px; padding: 8px 0; }
   body.sidebar-collapsed .nav-link .ic { width: auto; font-size: 19px; }
   body.sidebar-collapsed .nav-link .nav-label { display: none; }
   body.sidebar-collapsed .sidebar-collapse-footer { justify-content: center; padding: 14px 10px; }
