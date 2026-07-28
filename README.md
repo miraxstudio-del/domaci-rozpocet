@@ -98,6 +98,9 @@ zálohovat, jak aplikaci přenést na jiný počítač...) najdete v souboru
 - Žádná telemetrie, žádné reklamy, žádná registrace ani cloud
 - Databáze je obyčejný SQLite soubor, který máte plně pod kontrolou
 
+Podrobnosti pro aktuální způsob fungování najdete v
+[zásadách soukromí](PRIVACY.md) a [bezpečnostních zásadách](SECURITY.md).
+
 ## 🛠️ Použité technologie
 
 Čisté PHP 8.2 (bez frameworku) + SQLite, vlastní JS grafy nad `<canvas>`,
@@ -120,6 +123,9 @@ DomaciRozpocet/
 
 Tento projekt je **open-source** a je možné jej volně používat, upravovat i
 dále šířit — viz soubor [`LICENSE`](LICENSE) (MIT).
+
+Přečtěte si také [omezení odpovědnosti](DISCLAIMER.md). Licence MIT zůstává
+hlavním právním textem projektu; doplňující dokumenty ji nenahrazují.
 
 ## 🙋 O původu aplikace
 
