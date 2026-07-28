@@ -907,3 +907,143 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
   .analytics-chart-card .chart { min-height: 220px; height: 220px; }
   .export-month-field { max-width: none; }
 }
+
+/* ---- Tablet a mobil: vysouvací navigace a kompaktní rozvržení ---- */
+.mobile-app-header,
+.sidebar-backdrop,
+.sidebar-close { display: none; }
+
+@media (max-width: 1024px) {
+  .app-shell { display: block; }
+  .sidebar {
+    position: fixed;
+    z-index: 60;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: min(310px, calc(100vw - 48px));
+    height: 100dvh;
+    transform: translateX(-105%);
+    transition: transform .22s ease, box-shadow .22s ease;
+    box-shadow: none;
+    overscroll-behavior: contain;
+  }
+  .sidebar-open .sidebar { transform: translateX(0); box-shadow: 18px 0 44px rgba(20, 27, 45, .22); }
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    z-index: 50;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: rgba(12, 17, 30, .42);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .22s ease, visibility .22s ease;
+  }
+  .sidebar-open .sidebar-backdrop { opacity: 1; visibility: visible; }
+  body.sidebar-open { overflow: hidden; }
+
+  .mobile-app-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 64px;
+    margin: 0 -24px 28px;
+    padding: 10px 24px;
+    border-bottom: 1px solid var(--card-border);
+    background: var(--bg);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(12px);
+  }
+  .mobile-menu-toggle {
+    display: inline-grid;
+    place-content: center;
+    gap: 4px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid var(--control-border);
+    border-radius: 10px;
+    background: var(--control-surface);
+    color: var(--control-text);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+  }
+  .mobile-menu-toggle span { display: block; width: 18px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .18s ease, opacity .18s ease; }
+  .sidebar-open .mobile-menu-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .sidebar-open .mobile-menu-toggle span:nth-child(2) { opacity: 0; }
+  .sidebar-open .mobile-menu-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .mobile-app-brand { display: inline-flex; align-items: center; gap: 8px; color: var(--text); font-size: 16px; font-weight: 730; letter-spacing: -.025em; }
+  .mobile-app-brand span { font-size: 20px; }
+  .sidebar-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin-left: auto;
+    padding: 0;
+    border: 1px solid var(--control-border);
+    border-radius: 9px;
+    background: var(--control-surface);
+    color: var(--control-text);
+    cursor: pointer;
+    font-size: 25px;
+    line-height: 1;
+  }
+  .main { padding: 0 24px 32px; }
+}
+
+@media (max-width: 760px) {
+  .main { padding: 0 16px 28px; }
+  .mobile-app-header { min-height: 60px; margin: 0 -16px 22px; padding: 9px 16px; }
+  .topbar:not(.dashboard-topbar):not(.analytics-topbar) { align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+  .topbar:not(.dashboard-topbar):not(.analytics-topbar) > .btn-row { width: 100%; }
+  .topbar:not(.dashboard-topbar):not(.analytics-topbar) > .btn-row .btn { flex: 1 1 auto; justify-content: center; }
+  .grid[style*="grid-template-columns"],
+  .form-grid[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+  .card[style*="position:sticky"] { position: static !important; }
+  .filters-bar { align-items: stretch; gap: 10px; }
+  .filters-bar .field { flex: 1 1 100%; min-width: 0 !important; }
+  .filters-bar .field .btn { width: 100%; justify-content: center; }
+  .card-title-row { align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+  .card-title-row > .btn-row { width: 100%; }
+  .month-switch { width: 100%; justify-content: space-between; }
+  .month-switch .current { flex: 1; min-width: 0; }
+  .app-footer { align-items: flex-start; flex-direction: column; gap: 7px; }
+}
+
+@media (max-width: 560px) {
+  .sidebar { width: min(300px, calc(100vw - 34px)); }
+  .mobile-app-brand { font-size: 15px; }
+  .card { padding: 16px; }
+  .radio-pills { gap: 7px; }
+  .radio-pill { flex: 1 1 145px; }
+  .radio-pill span { justify-content: center; width: 100%; min-height: 42px; padding: 8px 10px; text-align: center; }
+  .btn-row { flex-wrap: wrap !important; }
+  .btn-row .btn { min-height: 42px; }
+  .dashboard-actions { min-width: 0; }
+  .dashboard-add-button { min-width: 0; padding: 0 13px; font-size: 13px; }
+  .dashboard-period-tabs { flex: 1 0 auto; }
+  .dashboard-period-tabs a { min-width: 59px; }
+  .dashboard-customizer-panel { width: min(340px, calc(100vw - 32px)); }
+  .analytics-section-card,
+  .analytics-summary-card { padding: 20px 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-backdrop,
+  .mobile-menu-toggle span { transition: none; }
+}
+
+@media print {
+  .mobile-app-header,
+  .sidebar-backdrop { display: none !important; }
+}

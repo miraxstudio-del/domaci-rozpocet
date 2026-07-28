@@ -23,8 +23,17 @@ $activeNav = $activeNav ?? '';
 </head>
 <body>
 <div class="app-shell">
+  <button class="sidebar-backdrop" type="button" data-sidebar-close tabindex="-1" aria-label="Zavřít navigační menu"></button>
   <?php include __DIR__ . '/partials/nav.php'; ?>
   <main class="main">
+    <div class="mobile-app-header">
+      <button class="mobile-menu-toggle" type="button" data-sidebar-toggle aria-controls="app-sidebar" aria-expanded="false" aria-label="Otevřít navigační menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="mobile-app-brand" href="/index.php?p=prehled" aria-label="Domácí rozpočet – Přehled">
+        <span aria-hidden="true">🏠</span> Domácí rozpočet
+      </a>
+    </div>
     <?php foreach (get_flashes() as $f): ?>
       <div class="flash <?= h($f['type']) ?>"><?= h($f['message']) ?></div>
     <?php endforeach; ?>

@@ -31,6 +31,59 @@
   });
 })();
 
+// Vysouvací navigace pro tablet a mobil. Na desktopu zůstává postranní menu stále viditelné.
+(function initResponsiveSidebar() {
+  var sidebar = document.getElementById('app-sidebar');
+  var toggle = document.querySelector('[data-sidebar-toggle]');
+  var closeControls = document.querySelectorAll('[data-sidebar-close]');
+  if (!sidebar || !toggle || !window.matchMedia) return;
+
+  var media = window.matchMedia('(max-width: 1024px)');
+  var lastFocused = null;
+
+  function setOpen(open, returnFocus) {
+    if (!media.matches) open = false;
+    document.body.classList.toggle('sidebar-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Zavřít navigační menu' : 'Otevřít navigační menu');
+
+    if (open) {
+      lastFocused = document.activeElement;
+      var closeButton = sidebar.querySelector('[data-sidebar-close]');
+      if (closeButton) closeButton.focus();
+    } else if (returnFocus && lastFocused && typeof lastFocused.focus === 'function') {
+      toggle.focus();
+    }
+  }
+
+  toggle.addEventListener('click', function () {
+    setOpen(!document.body.classList.contains('sidebar-open'), true);
+  });
+
+  closeControls.forEach(function (control) {
+    control.addEventListener('click', function () {
+      setOpen(false, true);
+    });
+  });
+
+  sidebar.addEventListener('click', function (event) {
+    if (media.matches && event.target.closest('.nav-link')) setOpen(false, false);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && document.body.classList.contains('sidebar-open')) {
+      setOpen(false, true);
+    }
+  });
+
+  function closeOnDesktop() { setOpen(false, false); }
+  if (typeof media.addEventListener === 'function') {
+    media.addEventListener('change', closeOnDesktop);
+  } else {
+    media.addListener(closeOnDesktop);
+  }
+})();
+
 // Přizpůsobení sekce Přehled: volba zobrazených doplňkových widgetů zůstává uložená v prohlížeči.
 (function initDashboardCustomizer() {
   var dashboard = document.querySelector('.dashboard');

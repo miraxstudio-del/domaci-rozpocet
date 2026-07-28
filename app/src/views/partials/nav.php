@@ -15,13 +15,14 @@ $navItems = [
 ];
 $household = get_setting('household_name', 'Naše domácnost');
 ?>
-<aside class="sidebar">
+<aside class="sidebar" id="app-sidebar" aria-label="Hlavní navigace">
   <div class="sidebar-brand">
     <span class="logo">🏡</span>
     <div>
       Domácí rozpočet
       <small><?= h($household) ?></small>
     </div>
+    <button class="sidebar-close" type="button" data-sidebar-close aria-label="Zavřít navigační menu"><span aria-hidden="true">×</span></button>
   </div>
   <form method="get" action="/index.php" class="sidebar-search">
     <input type="hidden" name="p" value="polozky">
