@@ -85,24 +85,25 @@ if ($view === 'year') {
     $totalPlanned = $budgets['total'];
 }
 ?>
-<div class="topbar">
+<div class="analytics-page">
+<div class="topbar analytics-topbar">
   <div>
-    <h1>📈 Statistiky</h1>
+    <h1>Statistiky</h1>
     <div class="subtitle">Podrobný pohled na hospodaření domácnosti</div>
   </div>
-  <div class="month-switch">
+  <div class="month-switch analytics-month-switch">
     <a class="btn outline icon-only" href="/index.php?<?= h(http_build_query($view === 'year' ? ['p' => 'statistiky', 'view' => 'year', 'y' => $prevPeriod] : ['p' => 'statistiky', 'm' => $prevPeriod, 'obdobi' => $trendMonths])) ?>">‹</a>
     <div class="current"><?= h(period_label($period)) ?></div>
     <a class="btn outline icon-only" href="/index.php?<?= h(http_build_query($view === 'year' ? ['p' => 'statistiky', 'view' => 'year', 'y' => $nextPeriod] : ['p' => 'statistiky', 'm' => $nextPeriod, 'obdobi' => $trendMonths])) ?>">›</a>
   </div>
-  <div class="pill-nav" style="margin:0;">
+  <div class="pill-nav analytics-view-tabs" style="margin:0;">
     <a class="<?= $view === 'month' ? 'active' : '' ?>" href="/index.php?p=statistiky&m=<?= h(current_month_year()) ?>">Měsíc</a>
     <a class="<?= $view === 'year' ? 'active' : '' ?>" href="/index.php?p=statistiky&view=year&y=<?= h(date('Y')) ?>">Rok</a>
   </div>
 </div>
 
-<div class="grid grid-cols-3">
-  <div class="card">
+<div class="grid grid-cols-3 analytics-overview-grid">
+  <div class="card analytics-chart-card">
     <h3>Příjmy proti výdajům</h3>
     <canvas class="chart" id="chart-income-expense"></canvas>
     <?= chart_legend_html([
@@ -110,7 +111,7 @@ if ($view === 'year') {
         ['label' => 'Výdaje', 'color' => 'var(--expense)', 'value' => format_money($summary['expense'])],
     ]) ?>
   </div>
-  <div class="card">
+  <div class="card analytics-chart-card">
     <h3>Pravidelné proti jednorázovým</h3>
     <canvas class="chart" id="chart-regular-onetime"></canvas>
     <?= chart_legend_html([
@@ -118,7 +119,7 @@ if ($view === 'year') {
         ['label' => 'Jednorázové', 'color' => palette_color(1), 'value' => format_money($summary['onetime'])],
     ]) ?>
   </div>
-  <div class="card">
+  <div class="card analytics-chart-card">
     <h3>Způsob placení</h3>
     <canvas class="chart" id="chart-methods"></canvas>
     <?php if ($methodChartData): ?>
@@ -132,7 +133,7 @@ if ($view === 'year') {
 </div>
 
 <?php if ($showBusiness && ($bizBreakdown['business'] > 0 || $bizBreakdown['personal'] > 0)): ?>
-<div class="card" style="margin-top:16px;">
+<div class="card analytics-section-card" style="margin-top:16px;">
   <h3>Soukromé proti podnikatelským výdajům</h3>
   <div class="grid grid-cols-2">
     <canvas class="chart" id="chart-business" style="max-width:320px;"></canvas>
@@ -146,12 +147,12 @@ if ($view === 'year') {
 </div>
 <?php endif; ?>
 
-<div class="card" style="margin-top:16px;">
+<div class="card analytics-section-card" style="margin-top:16px;">
   <div class="card-title-row"><h3>Výdaje podle kategorií</h3></div>
   <canvas class="chart" id="chart-categories" style="height:260px;"></canvas>
 </div>
 
-<div class="card" style="margin-top:16px;">
+<div class="card analytics-section-card" style="margin-top:16px;">
   <div class="card-title-row">
     <h3>Vývoj příjmů a výdajů</h3>
     <div class="pill-nav" style="margin:0;">
@@ -168,8 +169,8 @@ if ($view === 'year') {
   <div class="text-muted" style="margin-top:8px;font-size:13px;">Průměrný měsíční výdaj za sledované období: <strong><?= format_money($avgExpense) ?></strong></div>
 </div>
 
-<div class="grid grid-cols-2" style="margin-top:16px;">
-  <div class="card">
+<div class="grid grid-cols-2 analytics-summary-grid" style="margin-top:16px;">
+  <div class="card analytics-summary-card">
     <h3>💥 Největší výdaje <?= $view === 'year' ? 'roku' : 'měsíce' ?></h3>
     <?php if (!$topExpenses): ?>
       <p class="text-muted">Zatím žádné výdaje.</p>
@@ -187,7 +188,7 @@ if ($view === 'year') {
     <?php endif; ?>
   </div>
 
-  <div class="card">
+  <div class="card analytics-summary-card">
     <h3>🎯 Plánovaný proti skutečnému rozpočtu</h3>
     <?php if ($planned <= 0 && !$totalPlanned): ?>
       <p class="text-muted">Zatím nemáte nastavené rozpočty. <a href="/index.php?p=rozpocty">Nastavit rozpočty →</a></p>
@@ -250,3 +251,4 @@ drawLineChart(document.getElementById('chart-trend'), [
   }
 ], { height: 240 });
 </script>
+</div>

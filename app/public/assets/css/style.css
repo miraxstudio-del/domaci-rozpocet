@@ -180,6 +180,7 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; colo
 .card-title-row h3 { margin: 0; }
 
 .grid { display: grid; gap: 16px; }
+.grid > .card { margin-top: 0; height: 100%; }
 .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
@@ -733,4 +734,103 @@ canvas.chart { display: block; width: 100%; max-width: 100%; height: 220px; }
   .dashboard-category-heading { align-items: flex-start; flex-direction: column; }
   .dashboard-category-row { grid-template-columns: 1fr; gap: 5px; }
   .dashboard-category-total { text-align: left; }
+}
+
+/* ---- Statistiky ---- */
+.analytics-topbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  margin: 0 0 32px;
+}
+.analytics-topbar h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: 30px;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -.045em;
+}
+.analytics-topbar .subtitle { margin-top: 7px; color: var(--text-muted); font-size: 15px; }
+.analytics-month-switch { gap: 13px; padding-top: 4px; }
+.analytics-month-switch .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 47px;
+  padding: 0;
+  border-color: var(--control-border);
+  border-radius: 10px;
+  background: var(--control-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--control-text);
+}
+.analytics-month-switch .btn:hover { background: var(--neutral-soft); color: var(--accent); }
+.analytics-month-switch .current { min-width: 172px; color: var(--text); font-size: 18px; font-weight: 730; line-height: 47px; }
+.analytics-view-tabs {
+  display: flex;
+  justify-self: end;
+  gap: 4px;
+  padding-top: 5px;
+}
+.analytics-view-tabs a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 78px;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--control-border);
+  border-radius: 9px;
+  background: var(--control-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 620;
+}
+.analytics-view-tabs a.active { border-color: transparent; background: linear-gradient(135deg, #5544f7, #4938ed); box-shadow: 0 5px 13px rgba(77, 61, 240, .22); color: #fff; }
+.analytics-overview-grid { gap: 20px; }
+.analytics-chart-card,
+.analytics-section-card,
+.analytics-summary-card {
+  background: var(--dashboard-surface);
+  border-color: var(--card-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.analytics-chart-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 372px;
+  padding: 26px 24px 22px;
+}
+.analytics-chart-card h3,
+.analytics-section-card h3,
+.analytics-summary-card h3 { color: var(--text); font-size: 17px; font-weight: 730; letter-spacing: -.025em; }
+.analytics-chart-card .chart { flex: 1 0 auto; min-height: 250px; height: 250px; }
+.analytics-chart-card > :last-child { margin-top: auto !important; }
+.analytics-chart-card .text-muted { margin-top: auto !important; font-size: 14px !important; }
+.analytics-section-card { padding: 25px 24px; }
+.analytics-summary-grid { gap: 20px; }
+.analytics-summary-card { min-height: 218px; padding: 25px 24px; }
+
+@media (max-width: 1280px) {
+  .analytics-topbar { grid-template-columns: 1fr auto; }
+  .analytics-month-switch { grid-column: 1; grid-row: 2; }
+  .analytics-view-tabs { grid-column: 2; grid-row: 2; }
+}
+@media (max-width: 900px) {
+  .analytics-topbar { display: flex; flex-wrap: wrap; }
+  .analytics-month-switch { order: 3; }
+  .analytics-view-tabs { margin-left: auto; }
+  .analytics-overview-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .analytics-topbar h1 { font-size: 27px; }
+  .analytics-month-switch { width: 100%; justify-content: space-between; }
+  .analytics-month-switch .current { min-width: 0; font-size: 16px; }
+  .analytics-chart-card { min-height: 330px; padding: 22px 20px; }
+  .analytics-chart-card .chart { min-height: 220px; height: 220px; }
 }
