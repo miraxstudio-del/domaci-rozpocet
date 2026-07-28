@@ -9,6 +9,11 @@ Běží celá lokálně na vašem počítači — bez instalace, bez internetu, 
 
 Vytvořilo [Mirax Studio®](https://www.miraxstudio.cz) · více o vzniku aplikace v sekci [O programu](#-proč-tahle-aplikace-vznikla) níže.
 
+> **🔒 Vaše data zůstávají u vás.** Aktuální verze aplikace neodesílá rozpočet,
+> doklady, zálohy, exporty ani telemetrii autorovi nebo třetím stranám. Běží jen
+> lokálně na `127.0.0.1`; technický popis a ověřitelné odkazy do kódu jsou v
+> dokumentu [Tok dat a lokální provoz](DATA_FLOW.md).
+
 ![Náhled aplikace Domácí rozpočet - dashboard s přehledem příjmů, výdajů a kategorií](docs/screenshot-prehled.png)
 
 ---
@@ -99,7 +104,8 @@ zálohovat, jak aplikaci přenést na jiný počítač...) najdete v souboru
 - Databáze je obyčejný SQLite soubor, který máte plně pod kontrolou
 
 Podrobnosti pro aktuální způsob fungování najdete v
-[zásadách soukromí](PRIVACY.md) a [bezpečnostních zásadách](SECURITY.md).
+[zásadách soukromí](PRIVACY.md), [toku dat](DATA_FLOW.md) a
+[bezpečnostních zásadách](SECURITY.md).
 
 ## 🛠️ Použité technologie
 
